@@ -1,9 +1,9 @@
 import 'package:creator/creator.dart';
 import 'package:flutter/material.dart';
+import 'package:json_inator/features/open_from_file/open_file.dart';
 import 'package:json_inator/features/save_to_file/save.dart';
 
 //TO-DO: #2 save as file to .json. @anadreau
-//TO-DO: #3 open file from .json. @anadreau
 //TO-DO: #4 display editable list that will be formatted as json. @anadreau
 //TO-DO: #5 add value or list. @anadreau
 //TO-DO: #6 delete value or list. @anadreau
@@ -62,9 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     Watcher(
                       (context, ref, child) => MenuItemButton(
                         child: const Text('Save'),
-                        onPressed: () => ref.read(saveFile),
+                        onPressed: () => ref.read(saveFileCreator),
                       ),
                     ),
+                    Watcher((context, ref, child) => MenuItemButton(
+                          child: const Text('Open'),
+                          onPressed: () => ref.read(openFileCreator),
+                        )),
                   ], child: const Icon(Icons.menu)),
                 ],
               ),
