@@ -8,7 +8,7 @@ import 'package:creator/creator.dart';
 import 'package:file_picker/file_picker.dart';
 
 /// Takes a [data] object and writes it to a file at [filename]
-final saveFile = Creator((ref) async {
+final saveFile = Creator<void>((ref) async {
   var fileName = await ref.watch(getDirectoryCreator);
   var raw = ref.watch(data);
   File file = File(fileName);
