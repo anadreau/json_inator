@@ -1,6 +1,7 @@
+import 'package:creator/creator.dart';
 import 'package:flutter/material.dart';
+import 'package:json_inator/features/save_to_file/save.dart';
 
-//TO-DO: #1 save file to .json. @anadreau
 //TO-DO: #2 save as file to .json. @anadreau
 //TO-DO: #3 open file from .json. @anadreau
 //TO-DO: #4 display editable list that will be formatted as json. @anadreau
@@ -10,7 +11,7 @@ import 'package:flutter/material.dart';
 //TO-DO: #8 preview final json. @anadreau
 
 void main() {
-  runApp(const MyApp());
+  runApp(CreatorGraph(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,12 +20,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Jason-inator',
+      title: 'Json-inator',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Jason-inator'),
+      home: const MyHomePage(title: 'Json-inator'),
     );
   }
 }
@@ -39,14 +40,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  //Dummy data for save file testing
+  var dummyData = {'title': 'Save test', 'subject': 'testing'};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      restorationId: 'Json-inator',
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              flex: 1,
+              child: MenuBar(
+                children: <Widget>[
+                  SubmenuButton(menuChildren: <Widget>[
+                    Watcher(
+                      (context, ref, child) => MenuItemButton(
+                        child: const Text('Save'),
+                        onPressed: () => ref.read(saveFile),
+                      ),
+                    ),
+                  ], child: const Icon(Icons.menu)),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: Column(
