@@ -1,5 +1,3 @@
-//TO-DO: #3 open file from .json. @anadreau
-
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
