@@ -13,7 +13,8 @@ final saveFileCreator = Creator<void>((ref) async {
   file.writeAsStringSync(jsonEncode(raw));
 }, name: 'saveFileCreator');
 
-final saveData = Creator((ref) => {'title': 'Save test', 'subject': 'testing'},
+final saveData = Creator(
+    (ref) => <String, dynamic>{'title': 'Save test', 'subject': 'testing'},
     name: 'saveData');
 
 final selectSaveFileCreator = Creator((ref) async {

@@ -1,5 +1,6 @@
 import 'package:creator/creator.dart';
 import 'package:flutter/material.dart';
+import 'package:json_inator/features/add_item/add_item.dart';
 import 'package:json_inator/features/open_from_file/open_file.dart';
 import 'package:json_inator/features/save_to_file/save_file.dart';
 
@@ -64,10 +65,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () => ref.read(saveFileCreator),
                       ),
                     ),
-                    Watcher((context, ref, child) => MenuItemButton(
-                          child: const Text('Open'),
-                          onPressed: () => ref.read(openFileCreator),
-                        )),
+                    Watcher(
+                      (context, ref, child) => MenuItemButton(
+                        child: const Text('Open'),
+                        onPressed: () => ref.read(openFileCreator),
+                      ),
+                    ),
+                    Watcher(
+                      (context, ref, child) => MenuItemButton(
+                        child: const Text('add'),
+                        onPressed: () => ref.read(addItem),
+                      ),
+                    ),
                   ], child: const Icon(Icons.menu)),
                 ],
               ),
