@@ -18,7 +18,8 @@ final saveData = Creator(
     name: 'saveData');
 
 final selectSaveFileCreator = Creator((ref) async {
-  final String? chosenDir = await FilePicker.platform.saveFile();
+  final String? chosenDir = await FilePicker.platform
+      .saveFile(allowedExtensions: ['json'], type: FileType.custom);
   //final String directoryWithfilename = '$chosenDir' r'\testSave.json';
   if (chosenDir != null) {
     log(chosenDir);
