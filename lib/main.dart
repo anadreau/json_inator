@@ -72,13 +72,22 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     MenuItemButton(
-                      child: const Text('add'),
+                      child: const Text('Add Item'),
                       onPressed: () => showDialog(
                           context: context,
                           builder: (context) {
                             return const AddItemDialog();
                           }),
                     ),
+                    MenuItemButton(
+                      child: const Text('Add List'),
+                      //TO-DO: #11 Create method to validate and add lists. @anadreau
+                      onPressed: () => showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const AddItemDialog();
+                          }),
+                    )
                   ], child: const Icon(Icons.menu)),
                 ],
               ),
