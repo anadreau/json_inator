@@ -1,11 +1,11 @@
 import 'package:creator/creator.dart';
 import 'package:flutter/material.dart';
+import 'package:json_inator/features/add_item/add_item_dialog.dart';
 import 'package:json_inator/features/open_from_file/open_file.dart';
-import 'package:json_inator/features/save_to_file/save.dart';
+import 'package:json_inator/features/save_to_file/save_file.dart';
 
 //TO-DO: #2 save as file to .json. @anadreau
 //TO-DO: #4 display editable list that will be formatted as json. @anadreau
-//TO-DO: #5 add value or list. @anadreau
 //TO-DO: #6 delete value or list. @anadreau
 //TO-DO: #7 edit value or list. @anadreau
 //TO-DO: #8 preview final json. @anadreau
@@ -65,10 +65,29 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () => ref.read(saveFileCreator),
                       ),
                     ),
-                    Watcher((context, ref, child) => MenuItemButton(
-                          child: const Text('Open'),
-                          onPressed: () => ref.read(openFileCreator),
-                        )),
+                    Watcher(
+                      (context, ref, child) => MenuItemButton(
+                        child: const Text('Open'),
+                        onPressed: () => ref.read(openFileCreator),
+                      ),
+                    ),
+                    MenuItemButton(
+                      child: const Text('Add Item'),
+                      onPressed: () => showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const AddItemDialog();
+                          }),
+                    ),
+                    MenuItemButton(
+                      child: const Text('Add List'),
+                      //TO-DO: #11 Create method to validate and add lists. @anadreau
+                      onPressed: () => showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const AddItemDialog();
+                          }),
+                    )
                   ], child: const Icon(Icons.menu)),
                 ],
               ),
