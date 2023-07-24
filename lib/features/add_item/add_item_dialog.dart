@@ -6,27 +6,34 @@ class AddItemDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-        child: Column(
-      children: [
-        const Text('Add Item'),
-        const Row(
-          children: [
-            //key
-            TextField(),
-            //value
-            TextField(),
-          ],
+    return AlertDialog(
+      title: const Text('Add Item'),
+      content: const Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              //key
+              SizedBox(width: 150, child: TextField()),
+              Text(' : '),
+              //value
+              SizedBox(width: 150, child: TextField()),
+            ],
+          ),
+        ],
+      ),
+      actions: [
+        //Cancel Dialog
+        MaterialButton(
+          onPressed: () {},
+          child: const Text('Cancel'),
         ),
-        Row(
-          children: [
-            //Cancel Dialog
-            MaterialButton(onPressed: () {}),
-            //submit Dialog as new Item
-            MaterialButton(onPressed: () {}),
-          ],
+        //submit Dialog as new Item
+        MaterialButton(
+          onPressed: () {},
+          child: const Text('Submit'),
         ),
       ],
-    ));
+    );
   }
 }
