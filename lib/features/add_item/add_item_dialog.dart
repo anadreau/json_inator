@@ -106,6 +106,9 @@ class _AddItemDialogState extends State<AddItemDialog> {
                 ref.set(newItem, {keyController.text: valueController.text});
                 log(ref.read(newItem).toString());
                 ref.read(addItem);
+                keyController.clear();
+                valueController.clear();
+                Navigator.of(context).pop();
               }
             },
             child: const Text('Submit'),

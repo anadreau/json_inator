@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:creator/creator.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:json_inator/features/save_to_file/save_file.dart';
 
 final openData = Creator((ref) => <String, dynamic>{}, name: 'openData');
 
@@ -15,7 +16,9 @@ final openFileCreator = Creator<void>((ref) async {
     log('fileData: $fileData');
     var fileJson = jsonDecode(fileData);
     ref.set(openData, fileJson);
+    ref.set(saveData, fileJson);
     log('openData: ${ref.read(openData).toString()}');
+    log('saveData: ${ref.read(saveData).toString()}');
   }
 }, name: 'openFileCreator');
 
