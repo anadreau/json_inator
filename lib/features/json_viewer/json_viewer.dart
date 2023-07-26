@@ -4,6 +4,7 @@ import 'package:creator/creator.dart';
 import 'package:flutter/material.dart';
 import 'package:json_inator/features/save_to_file/save_file.dart';
 
+//TODO: split up and add toggle so screen either shows JsonViewer or Raw Json
 class JsonViewer extends StatelessWidget {
   const JsonViewer({super.key});
 
