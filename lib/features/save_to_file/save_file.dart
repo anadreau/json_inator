@@ -5,17 +5,22 @@ import 'dart:io';
 import 'package:creator/creator.dart';
 import 'package:file_picker/file_picker.dart';
 
-/// Takes a [saveData] object and writes it to a file at [filename]
+/// Takes a [currentData] object and writes it to a file at [filename]
 final saveFileCreator = Creator<void>((ref) async {
   var fileName = await ref.read(selectSaveFileCreator) ?? 'No Path Selected';
-  var raw = ref.read(saveData);
+  var raw = ref.read(currentData);
   File file = File(fileName);
   file.writeAsStringSync(jsonEncode(raw));
 }, name: 'saveFileCreator');
 
-final saveData = Creator(
-    (ref) => <String, dynamic>{'title': 'Save test', 'subject': 'testing'},
-    name: 'saveData');
+final currentData = Creator((ref) => <String, dynamic>{}, name: 'currentData');
+
+final viewData = Emitter<Map<String, dynamic>>((ref, emit) {
+  ref.watch(currentDataIsLoading);
+  final data = ref.watch(currentData);
+  emit(data);
+  ref.set(currentDataIsLoading, false);
+}, name: 'viewData', keepAlive: true);
 
 final selectSaveFileCreator = Creator((ref) async {
   final String? chosenDir = await FilePicker.platform
@@ -29,3 +34,5 @@ final selectSaveFileCreator = Creator((ref) async {
   //return directoryWithfilename;
   return chosenDir;
 }, name: 'selectSaveFileCreator');
+
+final currentDataIsLoading = Creator.value(false, name: 'currentDataIsLoading');

@@ -13,7 +13,7 @@ class JsonRaw extends StatelessWidget {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(50.0),
-              child: Text(ref.watch(saveData).toString()),
+              child: Text(ref.watch(currentData).toString()),
             ),
           ),
         ),
