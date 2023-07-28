@@ -1,11 +1,13 @@
 import 'package:creator/creator.dart';
 import 'package:flutter/material.dart';
 import 'package:json_inator/features/add_item/add_item_dialog.dart';
+import 'package:json_inator/features/json_viewer/json_raw.dart';
+import 'package:json_inator/features/json_viewer/json_toggle.dart';
+import 'package:json_inator/features/json_viewer/json_viewer.dart';
 import 'package:json_inator/features/open_from_file/open_file.dart';
 import 'package:json_inator/features/save_to_file/save_file.dart';
 
 //TO-DO: #2 save as file to .json. @anadreau
-//TO-DO: #4 display editable list that will be formatted as json. @anadreau
 //TO-DO: #6 delete value or list. @anadreau
 //TO-DO: #7 edit value or list. @anadreau
 //TO-DO: #8 preview final json. @anadreau
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Json-inator',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -92,38 +95,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
+            const JsonToggleButton(),
           ],
         ),
       ),
-      body: Center(
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Flexible(
-                flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Placeholder(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                )),
-          ],
-        ),
-      ),
+      body: Watcher((context, ref, child) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              switch (ref.watch(jsonToggleCreator) == true) {
+                true => const JsonViewer(),
+                false => const JsonRaw(),
+              }
+            ],
+          )),
     );
   }
 }
