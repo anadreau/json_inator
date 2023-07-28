@@ -7,7 +7,17 @@ class JsonRaw extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Watcher(
-        (context, ref, child) => Text(ref.watch(saveData).toString()));
+    return Expanded(
+      child: Watcher(
+        (context, ref, child) => SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: Text(ref.watch(saveData).toString()),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
