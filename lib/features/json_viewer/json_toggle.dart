@@ -1,7 +1,7 @@
 import 'package:creator/creator.dart';
 import 'package:flutter/material.dart';
 
-final jsonToggleCreator = Creator((ref) => true);
+final jsonToggleCreator = Creator((ref) => true, name: 'jsonToggleCreator');
 
 class JsonToggleButton extends StatefulWidget {
   const JsonToggleButton({super.key});

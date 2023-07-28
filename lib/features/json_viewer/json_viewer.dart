@@ -11,7 +11,7 @@ class JsonViewer extends StatelessWidget {
     return Expanded(
       child: Watcher(
         (context, ref, child) {
-          var entry = ref.watch(saveData);
+          var entry = ref.watch(viewData);
           return Padding(
             padding: const EdgeInsets.all(50.0),
             child: ListView.builder(
@@ -26,10 +26,9 @@ class JsonViewer extends StatelessWidget {
                     ),
                     trailing: Watcher((context, ref, child) => MaterialButton(
                           onPressed: () {
-                            ref.set(itemToDelete, {
-                              entry.keys.elementAt(index):
-                                  entry.values.elementAt(index)
-                            });
+                            var key = entry.keys.elementAt(index);
+                            var value = entry.values.elementAt(index);
+                            ref.set(itemToDelete, {key: value});
                             ref.read(deleteItem);
                           },
                           child: const Icon(Icons.delete),

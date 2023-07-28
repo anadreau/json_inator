@@ -16,9 +16,10 @@ final openFileCreator = Creator<void>((ref) async {
     log('fileData: $fileData');
     var fileJson = jsonDecode(fileData);
     ref.set(openData, fileJson);
-    ref.set(saveData, fileJson);
+    ref.set(currentData, fileJson);
+    ref.set(currentDataIsLoading, true);
     log('openData: ${ref.read(openData).toString()}');
-    log('saveData: ${ref.read(saveData).toString()}');
+    log('currentData: ${ref.read(currentData).toString()}');
   }
 }, name: 'openFileCreator');
 
