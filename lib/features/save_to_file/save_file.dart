@@ -15,16 +15,12 @@ final saveFileCreator = Creator<void>((ref) async {
 
 final currentData = Creator((ref) => <String, dynamic>{}, name: 'currentData');
 
-final viewData = Creator((ref) {
+final viewData = Emitter<Map<String, dynamic>>((ref, emit) {
   ref.watch(currentDataIsLoading);
-  var data = ref.read(currentData);
-  log('here');
-  if (data.isEmpty) {
-    data = {'no data': 'Empty'};
-  }
+  final data = ref.watch(currentData);
+  emit(data);
   ref.set(currentDataIsLoading, false);
-  return data;
-}, name: 'viewData');
+}, name: 'viewData', keepAlive: true);
 
 final selectSaveFileCreator = Creator((ref) async {
   final String? chosenDir = await FilePicker.platform
@@ -39,5 +35,4 @@ final selectSaveFileCreator = Creator((ref) async {
   return chosenDir;
 }, name: 'selectSaveFileCreator');
 
-final currentDataIsLoading =
-    Creator((ref) => true, name: 'currentDataIsLoading');
+final currentDataIsLoading = Creator.value(false, name: 'currentDataIsLoading');
