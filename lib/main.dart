@@ -1,6 +1,7 @@
 import 'package:creator/creator.dart';
 import 'package:flutter/material.dart';
 import 'package:json_inator/features/add_item/add_item_dialog.dart';
+import 'package:json_inator/features/add_list/add_list_dialog.dart';
 import 'package:json_inator/features/json_viewer/json_raw.dart';
 import 'package:json_inator/features/json_viewer/json_toggle.dart';
 import 'package:json_inator/features/json_viewer/json_viewer.dart';
@@ -87,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () => showDialog(
                         context: context,
                         builder: (context) {
-                          return const AddItemDialog();
+                          return const AddItemListDialog();
                         }),
                   ),
                 ],
