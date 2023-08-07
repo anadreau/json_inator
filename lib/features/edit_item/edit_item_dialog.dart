@@ -1,11 +1,12 @@
-import 'dart:developer';
-
 import 'package:creator/creator.dart';
 import 'package:flutter/material.dart';
-import 'package:json_inator/features/add_item/add_item.dart';
+import 'package:json_inator/features/edit_item/edit_item.dart';
 
 class EditItemDialog extends StatefulWidget {
-  const EditItemDialog({super.key});
+  final String? initialKey;
+  final String? initialValue;
+  const EditItemDialog(
+      {super.key, required this.initialKey, required this.initialValue});
 
   @override
   State<EditItemDialog> createState() => _EditItemDialogState();
@@ -25,6 +26,8 @@ class _EditItemDialogState extends State<EditItemDialog> {
 
   @override
   Widget build(BuildContext context) {
+    keyController.text = widget.initialKey!;
+    valueController.text = widget.initialValue!;
     return AlertDialog(
       title: const Text(
         'Edit Item',
@@ -102,9 +105,9 @@ class _EditItemDialogState extends State<EditItemDialog> {
           (context, ref, child) => MaterialButton(
             onPressed: () {
               if (_editformkey.currentState!.validate()) {
-                ref.set(newItem, {keyController.text: valueController.text});
-                log(ref.read(newItem).toString());
-                ref.read(addItem);
+                ref.set(
+                    itemEditted, {keyController.text: valueController.text});
+                ref.read(editItem);
                 keyController.clear();
                 valueController.clear();
                 Navigator.of(context).pop();

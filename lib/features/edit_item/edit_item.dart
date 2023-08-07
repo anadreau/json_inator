@@ -5,9 +5,9 @@ import 'package:json_inator/features/save_to_file/save_file.dart';
 
 //TO-DO: #7 edit value or list. @anadreau
 //Currently adds new line instead of replacing.
-final itemToEdit = Creator.value({}, name: 'itemToEdit');
+final itemToEdit = Creator.value(<String, dynamic>{}, name: 'itemToEdit');
 
-final itemEditted = Creator.value({}, name: 'itemEditted');
+final itemEditted = Creator.value(<String, dynamic>{}, name: 'itemEditted');
 
 final editItem = Creator<void>((ref) {
   //Data in the saveData Creator
@@ -17,10 +17,20 @@ final editItem = Creator<void>((ref) {
   var editData = ref.read(itemToEdit);
   log('tempData: $editData');
   var edittedData = ref.read(itemEditted);
+  log('edittedData: $edittedData');
   //Add newItem to saveData
-  oldData.update(editData.keys.first, (value) => edittedData);
-  var newData = oldData;
-  log('newData: $newData');
+  Map<String, dynamic> newData = {};
+  log('newData before: $newData');
+  log('editData.first: ${editData.keys.first}');
+  oldData.forEach((key, value) {
+    if (key == editData.keys.first) {
+      newData[edittedData.keys.first] = edittedData.values.first;
+    } else {
+      newData.addAll({key: '$value'});
+    }
+  });
+
+  log('newData after: $newData');
   //update saveData
   ref.set(currentData, newData);
   ref.set(currentDataIsLoading, true);

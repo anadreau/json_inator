@@ -34,16 +34,18 @@ class _JsonViewerState extends State<JsonViewer> {
                       leading: Watcher(
                         (context, ref, child) => MaterialButton(
                           onPressed: () {
+                            var key = entry.keys.elementAt(index);
+                            var value = entry.values.elementAt(index);
                             showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return const EditItemDialog();
+                                  return EditItemDialog(
+                                    initialKey: key,
+                                    initialValue: value ?? '',
+                                  );
                                 });
                             setState(() {
-                              var key = entry.keys.elementAt(index);
-                              var value = entry.values.elementAt(index);
                               ref.set(itemToEdit, {key: value});
-                              ref.read(editItem);
                             });
                           },
                           child: const Icon(Icons.edit),
@@ -59,6 +61,7 @@ class _JsonViewerState extends State<JsonViewer> {
                               setState(() {
                                 var key = entry.keys.elementAt(index);
                                 var value = entry.values.elementAt(index);
+                                ref.set(itemToEdit, {key: value});
                                 ref.set(itemToDelete, {key: value});
                                 ref.read(deleteItem);
                               });
