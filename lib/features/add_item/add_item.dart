@@ -17,6 +17,7 @@ final addItem = Creator<void>((ref) {
   log('newData: $newData');
   //update saveData
   ref.set(currentData, newData);
+  ref.set(currentDataIsLoading, true);
 }, name: 'addItem');
 
 final newItem = Creator((ref) => <String, dynamic>{'Add Item': 'new Data'},

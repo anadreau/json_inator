@@ -35,4 +35,8 @@ final selectSaveFileCreator = Creator((ref) async {
   return chosenDir;
 }, name: 'selectSaveFileCreator');
 
-final currentDataIsLoading = Creator.value(false, name: 'currentDataIsLoading');
+final currentDataIsLoading = Creator.value(
+  false,
+  name: 'currentDataIsLoading',
+  keepAlive: true,
+);

@@ -1,7 +1,7 @@
 import 'package:creator/creator.dart';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:json_inator/features/add_item/add_item.dart';
+import 'package:json_inator/features/add_list/add_list.dart';
 
 //Pop-up dialogue to add item
 class AddItemListDialog extends StatefulWidget {
@@ -104,16 +104,19 @@ class _AddItemListDialogState extends State<AddItemListDialog> {
           (context, ref, child) => MaterialButton(
             onPressed: () {
               if (_addItemListformkey.currentState!.validate()) {
-                ref.set(newItem, {
+                ref.set(newListItem, {
                   _addItemListKeyController.text:
-                      '[${_addItemListValueController.text}]'
+                      _addItemListValueController.text
                 });
-                log(ref.read(newItem).toString());
-                ref.read(addItem);
+                log(ref.read(newListItem).toString());
+
                 _addItemListKeyController.clear();
                 _addItemListValueController.clear();
                 Navigator.of(context).pop();
               }
+              setState(() {
+                ref.read(addListItem);
+              });
             },
             child: const Text('Submit'),
           ),
