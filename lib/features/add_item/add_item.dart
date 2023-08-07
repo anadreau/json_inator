@@ -21,8 +21,3 @@ final addItem = Creator<void>((ref) {
 
 final newItem = Creator((ref) => <String, dynamic>{'Add Item': 'new Data'},
     name: 'newItem');
-
-newItemBuilder(String key, dynamic value) {
-  var temp = <String, dynamic>{};
-  temp.addAll({key: value});
-}
