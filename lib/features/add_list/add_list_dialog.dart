@@ -70,8 +70,9 @@ class _AddItemListDialogState extends State<AddItemListDialog> {
                         if (value == null ||
                             value.trimRight() == '' ||
                             value.isEmpty) {
-                          return 'Please enter valid String';
+                          return 'Please enter a valid String';
                         }
+                        //TO-DO: create Validator for list by comma
                         return null;
                       },
                       controller: _addItemListValueController,
