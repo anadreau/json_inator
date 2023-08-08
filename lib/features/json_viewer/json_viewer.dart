@@ -19,59 +19,75 @@ class _JsonViewerState extends State<JsonViewer> {
       child: Watcher(
         (context, ref, child) {
           final entry = ref.watch(viewData.asyncData).data ?? {};
-          return Padding(
-            padding: const EdgeInsets.all(50.0),
-            child: ListView.builder(
-              itemCount: entry.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: ListTile(
-                      tileColor: Colors.grey,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      leading: Watcher(
-                        (context, ref, child) => MaterialButton(
-                          onPressed: () {
-                            var key = entry.keys.elementAt(index);
-                            var value = entry.values.elementAt(index);
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return EditItemDialog(
-                                    initialKey: key,
-                                    initialValue: value ?? '',
-                                  );
-                                });
-                            setState(() {
-                              ref.set(itemToEdit, {key: value});
-                            });
-                          },
-                          child: const Icon(Icons.edit),
+          if (entry.isEmpty) {
+            return const Padding(
+              padding: EdgeInsets.all(50.0),
+              child: Center(
+                  child: Text(
+                'Please add item. ',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              )),
+            );
+          } else {
+            return Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: ListView.builder(
+                itemCount: entry.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: ListTile(
+                        tileColor: Colors.grey,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      ),
-                      title: Text(
-                        entry.keys.elementAt(index),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(entry.values.elementAt(index).toString()),
-                      trailing: Watcher((context, ref, child) => MaterialButton(
+                        leading: Watcher(
+                          (context, ref, child) => MaterialButton(
                             onPressed: () {
+                              var key = entry.keys.elementAt(index);
+                              var value = entry.values.elementAt(index);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return EditItemDialog(
+                                      initialKey: key,
+                                      initialValue: value ?? '',
+                                    );
+                                  });
                               setState(() {
-                                var key = entry.keys.elementAt(index);
-                                var value = entry.values.elementAt(index);
                                 ref.set(itemToEdit, {key: value});
-                                ref.set(itemToDelete, {key: value});
-                                ref.read(deleteItem);
                               });
                             },
-                            child: const Icon(Icons.delete),
-                          ))),
-                );
-              },
-            ),
-          );
+                            child: const Icon(Icons.edit),
+                          ),
+                        ),
+                        title: Text(
+                          entry.keys.elementAt(index),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle:
+                            Text(entry.values.elementAt(index).toString()),
+                        trailing:
+                            Watcher((context, ref, child) => MaterialButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      var key = entry.keys.elementAt(index);
+                                      var value = entry.values.elementAt(index);
+                                      ref.set(itemToEdit, {key: value});
+                                      ref.set(itemToDelete, {key: value});
+                                      ref.read(deleteItem);
+                                    });
+                                  },
+                                  child: const Icon(Icons.delete),
+                                ))),
+                  );
+                },
+              ),
+            );
+          }
         },
       ),
     );
