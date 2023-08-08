@@ -21,7 +21,8 @@ final editItem = Creator<void>((ref) {
   //Add newItem to saveData
   Map<String, dynamic> newData = {};
   log('newData before: $newData');
-  log('editData.first: ${editData.keys.first}');
+  log('editData.keys.first: ${editData.keys.first}');
+  log('editData.values.first: ${editData.values.first}');
   oldData.forEach((key, value) {
     if (key == editData.keys.first) {
       newData[edittedData.keys.first] = edittedData.values.first;
