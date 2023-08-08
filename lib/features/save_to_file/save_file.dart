@@ -9,7 +9,7 @@ import 'package:file_picker/file_picker.dart';
 final saveFileCreator = Creator<void>((ref) async {
   var fileName = await ref.read(selectSaveFileCreator) ?? 'No Path Selected';
   var raw = ref.read(currentData);
-  File file = File(fileName);
+  File file = File('$fileName.json');
   file.writeAsStringSync(jsonEncode(raw));
 }, name: 'saveFileCreator');
 
