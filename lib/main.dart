@@ -9,6 +9,7 @@ import 'package:json_inator/features/save_to_file/save_file.dart';
 
 //TO-DO: #2 save as file to .json. @anadreau
 //TO-DO: #8 preview final json. @anadreau
+//TO-DO: #17 Change from Creator to Bloc. @anadreaue
 
 void main() {
   runApp(CreatorGraph(child: const MyApp()));
