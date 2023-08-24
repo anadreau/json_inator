@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -8,17 +9,20 @@ part 'save_file_event.dart';
 part 'save_file_state.dart';
 
 class SaveFileBloc extends Bloc<SaveFileEvent, SaveFileState> {
-  SaveFileBloc() : super(SaveFileInitial()) {
+  SaveFileBloc() : super(SaveFileInitialState()) {
     on<SaveFile>((event, emit) {});
 
-    on<SelectFile>((event, emit) async {
-      final String? chosenDir = await FilePicker.platform
-          .saveFile(allowedExtensions: ['json'], type: FileType.custom);
-      //final String directoryWithfilename = '$chosenDir' r'\testSave.json';
-      if (chosenDir != null) {
-        log(chosenDir);
-      }
-    });
+    on<SelectFile>(_selectFile);
+  }
+}
+
+FutureOr<void> _selectFile(
+    SelectFile event, Emitter<SaveFileState> emit) async {
+  final String? chosenDir = await FilePicker.platform
+      .saveFile(allowedExtensions: ['json'], type: FileType.custom);
+  //final String directoryWithfilename = '$chosenDir' r'\testSave.json';
+  if (chosenDir != null) {
+    log(chosenDir);
   }
 }
 
