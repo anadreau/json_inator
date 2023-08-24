@@ -1,9 +1,17 @@
-import 'dart:developer';
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
 
-import 'package:creator/creator.dart';
-import 'package:json_inator/features/save_to_file/save_file.dart';
+part 'add_item_event.dart';
+part 'add_item_state.dart';
 
-/// Creator that takes the saveData and adds the tempData to it.
+class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
+  AddItemBloc() : super(AddItemInitial()) {
+    on<AddItem>((event, emit) {
+      final newItem = <String, dynamic>{};
+    });
+  }
+}
+
 final addItem = Creator<void>((ref) {
   //Data in the saveData Creator
   var oldData = ref.read(currentData);
